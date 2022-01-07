@@ -1,46 +1,82 @@
 <template>
   <div class="highlight-container f-column w-full">
-    {{ highlightedWords }}
-    <div></div>
-    <q-list
-      v-for="word in highlightedWords"
-      :key="word"
-      bordered
-      class="rounded-borders"
-    >
-      <q-expansion-item expand-icon-toggle expand-separator :label="word">
-        <q-card>
-          <q-card-section>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem,
-            eius reprehenderit eos corrupti commodi magni quaerat ex numquam,
-            dolorum officiis modi facere maiores architecto suscipit iste
-            eveniet doloribus ullam aliquid.
-          </q-card-section>
-        </q-card>
-      </q-expansion-item></q-list
-    >
+    <div class="list-container">
+      <q-list
+        v-for="(word, i) in highlightedWords"
+        :key="word"
+        bordered
+        class="rounded-borders list-item"
+      >
+        <q-expansion-item
+          expand-icon-toggle
+          expand-separator
+          :label="word"
+          class="expansion-item"
+          @show="getRelatedPosts(word, i)"
+        >
+        <div v-if="posts[i] && posts[i].length > 0">
+          <HighlightCards
+            v-for="post in posts[i]"
+            :key="post.id"
+            :title="post.title"
+            :content="post.content"
+            :post="post"
+          />
+          </div>
+           </q-expansion-item
+      ></q-list>
+    </div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapActions, mapGetters } from "vuex";
+import HighlightCards from "./HighlightCards";
 
 export default {
   name: "HighlightPosts",
+  data(){
+    return{
+      posts: [],
+    }
+  },
+  components: { HighlightCards },
   computed: {
     ...mapGetters(["highlightedWords"]),
+  },
+  methods: {
+    ...mapActions({ getPostByHighlight: "getPostByHighlight" }),
+    async getRelatedPosts(word, index) {
+      this.posts[index] = await this.getPostByHighlight(word);
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
 @import "@/styles/global.scss";
-
+::v-deep .q-expansion-item__content {
+  padding: 20px;
+}
+::v-deep .q-item {
+  background: $white-color;
+}
+::v-deep .q-item__label {
+  font-size: 20px;
+  font-weight: 800;
+  padding: 10px;
+}
 .highlight-container {
   background: $primary-color;
   justify-content: flex-start;
   align-items: center;
   min-height: calc(100vh - 132px);
   padding: 30px;
+  .list-container {
+    width: 40%;
+    .list-item {
+      margin-bottom: 20px;
+    }
+  }
 }
 </style>

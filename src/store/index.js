@@ -46,5 +46,14 @@ export default createStore({
     saveHighlightedText({ commit }, payload) {
       commit("saveHighlightedText", payload);
     },
+    getPostByHighlight({ state }, payload) {
+      let posts = [];
+      state.posts.forEach((post) => {
+        if (post.content && post.content.includes(payload)) {
+          posts = [...posts, post];
+        }
+      });
+      return posts;
+    },
   },
 });
