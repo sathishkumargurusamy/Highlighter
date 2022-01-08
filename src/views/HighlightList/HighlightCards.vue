@@ -58,21 +58,7 @@ export default {
       this.$router.push({ name: "ViewPost", query: { postId: this.post?.id } });
     },
   },
-  mounted() {
-    if (this.content) {
-      var prevLH = document.querySelector(".content-hidden").style.lineHeight;
-      var factor = 1000;
-      document.querySelector(".content-hidden").style.lineHeight =
-        factor + "px";
-
-      var height = document
-        .querySelector(".content-hidden")
-        .getBoundingClientRect().height;
-      document.querySelector(".content-hidden").style.lineHeight = prevLH;
-
-      console.log(Math.floor(height / factor));
-    }
-  },
+  mounted() {},
 };
 </script>
 
