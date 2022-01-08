@@ -51,6 +51,7 @@ export default {
       const element = document.querySelectorAll(".selectable-area");
       element.forEach((elm) => {
         elm.addEventListener("mouseup", this.textSelected);
+        elm.addEventListener("touchend", this.textSelected);
       });
     },
     textSelected(event) {
