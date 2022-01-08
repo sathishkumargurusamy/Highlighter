@@ -1,6 +1,12 @@
 <template>
   <div class="highlight-container f-column w-full">
     <div class="list-container">
+      <div class="title d-flex" v-if="highlightedWords.length !== 0">
+        Highlights
+      </div>
+      <div class="no-post d-flex" v-if="highlightedWords.length === 0">
+        No Highlights!
+      </div>
       <q-list
         v-for="(word, i) in highlightedWords"
         :key="word"
@@ -14,16 +20,15 @@
           class="expansion-item"
           @show="getRelatedPosts(word, i)"
         >
-        <div v-if="posts[i] && posts[i].length > 0">
-          <HighlightCards
-            v-for="post in posts[i]"
-            :key="post.id"
-            :title="post.title"
-            :content="post.content"
-            :post="post"
-          />
-          </div>
-           </q-expansion-item
+          <div v-if="posts[i] && posts[i].length > 0">
+            <HighlightCards
+              v-for="post in posts[i]"
+              :key="post.id"
+              :title="post.title"
+              :content="post.content"
+              :post="post"
+            />
+          </div> </q-expansion-item
       ></q-list>
     </div>
   </div>
@@ -35,10 +40,10 @@ import HighlightCards from "./HighlightCards";
 
 export default {
   name: "HighlightPosts",
-  data(){
-    return{
+  data() {
+    return {
       posts: [],
-    }
+    };
   },
   components: { HighlightCards },
   computed: {
@@ -72,10 +77,35 @@ export default {
   align-items: center;
   min-height: calc(100vh - 132px);
   padding: 30px;
+  .title {
+    width: 50%;
+    margin: 10px 0;
+    font-size: 40px;
+    font-weight: 800;
+    align-items: left;
+    @media (max-width: 1400px) {
+      width: 60%;
+    }
+    @media (max-width: 1000px) {
+      width: 90%;
+    }
+  }
+  .no-post {
+    @extend .title;
+    margin: 30px;
+    align-items: center !important;
+    justify-content: center;
+  }
   .list-container {
     width: 40%;
     .list-item {
       margin-bottom: 20px;
+    }
+        @media (max-width: 1400px) {
+      width: 60%;
+    }
+    @media (max-width: 1000px) {
+      width: 90%;
     }
   }
 }

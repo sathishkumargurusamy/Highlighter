@@ -29,9 +29,8 @@
         </div>
         <div class="w-full d-flex flex-end">
           <q-btn
-            size="20px"
-            rounded
-            class="glossy"
+            size="15px"
+            unelevated 
             color="black"
             :label="$route.query.isEdit ? 'Edit' : 'Create'"
             :disabled="validate()"
@@ -113,7 +112,7 @@ export default {
 .main-container {
   background: $primary-color;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   min-height: calc(100vh - 132px);
 }
 .card-container {

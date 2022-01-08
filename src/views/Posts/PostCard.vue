@@ -6,23 +6,10 @@
           <q-item-label class="title text-ellipsis">{{ title }}</q-item-label>
           <q-item-label caption> {{ author }} </q-item-label>
         </q-item-section>
-        <q-btn color="black" label=". . .">
-          <q-menu transition-show="jump-down" transition-hide="jump-up">
-            <q-list style="min-width: 100px">
-              <q-item clickable>
-                <q-item-section @click.stop="editPost"
-                  >Edit Post</q-item-section
-                >
-              </q-item>
-              <q-item clickable>
-                <q-item-section @click.stop="deletePost"
-                  >Delete Post</q-item-section
-                >
-              </q-item>
-              <q-separator />
-            </q-list>
-          </q-menu>
-        </q-btn>
+        <div class="icon-container align-center">
+          <img src="@/assets/pencil.png" @click.stop="editPost" width="25" height="25" alt="edit" />
+          <img src="@/assets/delete.png" @click.stop="deletePost" width="25" height="25" alt="delete" />
+        </div>
       </q-item>
       <q-separator />
       <q-card-section horizontal>
@@ -83,8 +70,18 @@ export default {
 @import "@/styles/global.scss";
 
 .my-card {
-  margin-bottom: 30px;
+  margin: 30px 0;
   height: 180px;
+  .icon-container {
+    gap: 20px;
+    img {
+      cursor: pointer;
+    }
+    img:hover {
+      width: 26px;
+      height: 26px;
+    }
+  }
   .title {
     font-weight: 600;
     font-size: 20px;
