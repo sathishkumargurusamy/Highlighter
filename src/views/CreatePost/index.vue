@@ -32,7 +32,7 @@
             size="15px"
             unelevated 
             color="black"
-            :label="$route.query.isEdit ? 'Edit' : 'Create'"
+            :label="$route.query.isEdit ? 'Save' : 'Save'"
             :disabled="validate()"
             v-on="
               $route.query.isEdit ? { click: editPost } : { click: savePost }
