@@ -11,7 +11,7 @@
       <div class="author">
         {{ post.author_name }} {{ formatDate(post.created_date) }}
       </div>
-      <div class="content selectable-area">{{ post.content }}</div>
+      <div class="content selectable-area" v-html="highlightedText()"></div>
     </div>
   </div>
 </template>
@@ -28,6 +28,7 @@ export default {
       post: {},
       showHighlighter: false,
       selectedText: "",
+      selectedWords: [],
     };
   },
   methods: {
@@ -39,12 +40,35 @@ export default {
       return moment(date).format("DD MMM, YY");
     },
     async getPost() {
+      if (this.$route.query.selectedWord) {
+        this.selectedWords = [
+          ...this.selectedWords,
+          this.$route.query.selectedWord,
+        ];
+        this.post = await this.getPostById(this.$route.query.postId);
+      }
       if (this.$route.query.postId) {
         this.post = await this.getPostById(this.$route.query.postId);
       }
     },
+    highlightedText() {
+      if (!this.selectedWords.length) {
+        return this.post.content;
+      }
+      let content = this.post.content;
+      this.selectedWords.forEach((word) => {
+        content = content.replace(
+          new RegExp(word, "i"),
+          '<span style="background-color: black; color: white; border-radius: 4px; font-weight: 600; ">' +
+            word +
+            "</span>"
+        );
+      });
+      return content;
+    },
     highlightText() {
       this.saveHighlightedText(this.selectedText);
+      this.selectedWords = [...this.selectedWords, this.selectedText];
       this.showHighlighter = false;
     },
     watchSelection() {

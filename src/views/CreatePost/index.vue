@@ -23,11 +23,9 @@
           v-model="content"
           label="Content"
           type="textarea"
+          :hint="wordCountCheck() < 50 && 'Content must contain 50 words.'" 
           :error="content.length > 0 && wordCountCheck() < 50"
         />
-        <div class="error" v-show="wordCountCheck() < 50">
-          Content must contain 50 words.
-        </div>
         <div class="w-full d-flex flex-end">
           <q-btn
             size="15px"
@@ -135,8 +133,7 @@ export default {
     margin-bottom: 20px;
   }
 }
-.error {
-  color: red;
-  font-size: 12px;
+::v-deep .q-field__messages {
+  color: #c10015 !important;
 }
 </style>

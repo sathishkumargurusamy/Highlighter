@@ -65,7 +65,7 @@ export default {
       await this.deletePostById(this.post?.id);
     },
     navigateToPost() {
-      this.$router.push({ name: "ViewPost", query: { postId: this.post?.id } });
+      this.$router.push({ name: "ViewPost", query: { postId: this.post?.id, selectedWord: this.selectedWord } });
     },
     rearrangeContent() {
       let index = this.content.indexOf(this.selectedWord);
