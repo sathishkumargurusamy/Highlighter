@@ -51,7 +51,6 @@ export default {
       const element = document.querySelectorAll(".selectable-area");
       element.forEach((elm) => {
         elm.addEventListener("mouseup", this.textSelected);
-        elm.addEventListener("touchend", this.textSelected);
       });
     },
     textSelected(event) {
@@ -111,6 +110,7 @@ export default {
       border-left: 10px solid black;
       border-radius: 20px;
       font-size: 18px;
+      line-height: 32px;
     }
   }
   .tool-tip {

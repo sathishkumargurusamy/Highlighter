@@ -23,9 +23,10 @@
           v-model="content"
           label="Content"
           type="textarea"
+          :error="content.length > 0 && wordCountCheck() < 50"
         />
         <div class="error" v-show="wordCountCheck() < 50">
-          Content should atleast contains 50 words!
+          Content must contain 50 words.
         </div>
         <div class="w-full d-flex flex-end">
           <q-btn

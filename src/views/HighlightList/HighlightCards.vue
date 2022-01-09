@@ -58,7 +58,8 @@ export default {
       this.$router.push({ name: "ViewPost", query: { postId: this.post?.id } });
     },
   },
-  mounted() {},
+  mounted() {
+  },
 };
 </script>
 
@@ -82,6 +83,7 @@ export default {
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
+    line-height: 22px;
   }
   .read-more {
     position: absolute;

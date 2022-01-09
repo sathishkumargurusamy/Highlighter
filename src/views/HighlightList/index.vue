@@ -1,11 +1,14 @@
 <template>
   <div class="highlight-container f-column w-full">
     <div class="list-container">
-      <div class="title d-flex" v-if="highlightedWords.length !== 0">
+      <div v-if="highlightedWords.size > 0" class="title d-flex">
         Highlights
       </div>
-      <div class="no-post d-flex" v-if="highlightedWords.length === 0">
-        No Highlights!
+      <div
+        v-if="!highlightedWords.size"
+        class="no-post d-flex"
+      >
+        No Highlights
       </div>
       <q-list
         v-for="(word, i) in highlightedWords"
@@ -83,6 +86,7 @@ export default {
     font-size: 40px;
     font-weight: 800;
     align-items: left;
+    margin-bottom: 30px;
     @media (max-width: 1400px) {
       width: 60%;
     }
@@ -91,17 +95,19 @@ export default {
     }
   }
   .no-post {
-    @extend .title;
     margin: 30px;
+    width: 100%;
+    font-size: 40px;
+    font-weight: 800;
     align-items: center !important;
     justify-content: center;
   }
   .list-container {
-    width: 40%;
+    width: 60%;
     .list-item {
       margin-bottom: 20px;
     }
-        @media (max-width: 1400px) {
+    @media (max-width: 1400px) {
       width: 60%;
     }
     @media (max-width: 1000px) {
