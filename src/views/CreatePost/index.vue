@@ -23,7 +23,7 @@
           v-model="content"
           label="Content"
           type="textarea"
-          :hint="wordCountCheck() < 50 && 'Content must contain 50 words.'" 
+          :hint="wordCountCheck() < 50 ? 'Content must contain 50 words.' : ''" 
           :error="content.length > 0 && wordCountCheck() < 50"
         />
         <div class="w-full d-flex flex-end">
