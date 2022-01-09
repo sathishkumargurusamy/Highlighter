@@ -85,12 +85,6 @@ export default {
     font-weight: 800;
     align-items: left;
     margin-bottom: 30px;
-    @media (max-width: 1400px) {
-      width: 60%;
-    }
-    @media (max-width: 1000px) {
-      width: 90%;
-    }
   }
   .no-post {
     margin: 30px;
@@ -106,7 +100,7 @@ export default {
       margin-bottom: 20px;
     }
     @media (max-width: 1400px) {
-      width: 60%;
+      width: 90%;
     }
     @media (max-width: 1000px) {
       width: 90%;

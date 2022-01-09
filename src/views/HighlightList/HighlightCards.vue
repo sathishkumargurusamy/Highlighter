@@ -119,6 +119,11 @@ export default {
     overflow: hidden;
     text-overflow: ellipsis;
     line-height: 22px;
+
+    @media (max-width: 1000px) {
+          font-size: 1.4vw;
+
+    }
   }
   .read-more {
     position: absolute;
