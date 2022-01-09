@@ -4,10 +4,7 @@
       <div v-if="highlightedWords.size > 0" class="title d-flex">
         Highlights
       </div>
-      <div
-        v-if="!highlightedWords.size"
-        class="no-post d-flex"
-      >
+      <div v-if="!highlightedWords.size" class="no-post d-flex">
         No Highlights
       </div>
       <q-list
@@ -30,6 +27,7 @@
               :title="post.title"
               :content="post.content"
               :post="post"
+              :selectedWord="word"
             />
           </div> </q-expansion-item
       ></q-list>

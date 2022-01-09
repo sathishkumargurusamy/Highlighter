@@ -10,7 +10,7 @@
       <q-card-section horizontal>
         <q-card-section>
           <div class="position-relative">
-            <div class="content">{{ content }}</div>
+            <div class="content" v-html="highlightText()" />
             <span class="read-more"
               >...<span @click="navigateToPost">Read More</span></span
             >
@@ -25,6 +25,12 @@
 import { mapActions } from "vuex";
 export default {
   name: "HighlightCard",
+  data() {
+    return {
+      contentData: "",
+      query: "",
+    };
+  },
   props: {
     title: {
       type: String,
@@ -42,6 +48,10 @@ export default {
       type: Object,
       required: true,
     },
+    selectedWord: {
+      type: String,
+      required: true,
+    },
   },
   methods: {
     ...mapActions({ deletePostById: "deletePostById" }),
@@ -57,8 +67,33 @@ export default {
     navigateToPost() {
       this.$router.push({ name: "ViewPost", query: { postId: this.post?.id } });
     },
+    rearrangeContent() {
+      let index = this.content.indexOf(this.selectedWord);
+      if (index <= 100) {
+        let firstLine = this.content.substring(0, index);
+        let secondLine = this.content.substring(index, this.content.length);
+        this.contentData = `${firstLine}${secondLine}`;
+        return;
+      }
+      let firstLine = this.content.substring(index - 250, index);
+      let secondLine = this.content.substring(index, this.content.length);
+      this.contentData = `${firstLine}${secondLine}`;
+    },
+    highlightText() {
+      if (!this.selectedWord) {
+        return this.contentData;
+      }
+      return this.contentData.replace(
+        new RegExp(this.selectedWord, "i"),
+        '<span style="background-color: yellow; border-radius: 4px; font-weight: 600; ">' +
+          this.selectedWord +
+          "</span>"
+      );
+    },
   },
   mounted() {
+    this.rearrangeContent();
+    this.highlightText();
   },
 };
 </script>
